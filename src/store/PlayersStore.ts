@@ -1,4 +1,5 @@
 import redis from 'redis';
+import { promisify } from 'util';
 
 export default class PlayersStore {
 
@@ -23,5 +24,20 @@ export default class PlayersStore {
 
     // Execute transaction.
     multi.exec();
+  }
+
+  // Check if any roles are open. If role is open, assign to player.
+  // If no roles open, send error.
+  assignRole(): Promise<string> {
+
+    return new Promise((resolve, reject) => {
+
+      this.client.rpop('open-roles', (err: Error | null, result: string) => {
+        if (err || result === null) {
+          reject(err || Error('Roles not available'));
+        }
+        resolve(result);
+      });
+    });
   }
 }
