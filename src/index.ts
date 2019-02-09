@@ -11,5 +11,6 @@ server.listen(3000, (err: Error) => {
   if (err) {
     throw err;
   }
+  // tslint:disable-next-line
   console.log('Server listening on port 3000');
 });

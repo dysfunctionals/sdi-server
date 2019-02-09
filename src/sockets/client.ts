@@ -6,12 +6,20 @@ export default class ClientSocket {
   io: socketIo.Server;
 
   constructor(server: Server) {
-    this.io = socketIo(server);
+    this.io = socketIo(server, {
+      path: '/socket',
+    });
+
+    this.init();
   }
 
   init(): void {
-    this.io.on('connect', (socket: socketIo.Socket) => {
-
+    this.io
+    .of('/client')
+    .on('connect', (socket: socketIo.Socket) => {
+      socket.on('name', (name: string) => {
+        socket.emit('greet', `Hello ${name}!`);
+      });
     });
   }
 }
