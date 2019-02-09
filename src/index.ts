@@ -1,12 +1,13 @@
 import express from 'express';
+import http from 'http';
+import ClientSocket from './sockets/client';
 
 const app: express.Application = express();
+const server: http.Server = http.createServer(app);
 
-app.get('/', (req: express.Request, res: express.Response) => {
-  res.json({ message: 'Hello World!' });
-});
+const socket: ClientSocket = new ClientSocket(server);
 
-app.listen(3000, (err: Error) => {
+server.listen(3000, (err: Error) => {
   if (err) {
     throw err;
   }
