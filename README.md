@@ -1,4 +1,4 @@
-# Just a basic template I wrote to use express with typescript!
+# Server for Hack the South project. 
 
 Production build: npm build  
 Run in dev mode: npm run dev  
