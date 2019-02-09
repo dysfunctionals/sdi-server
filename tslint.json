@@ -5,12 +5,14 @@
     ],
     "rules": {
       "import-name": false,
+      "no-increment-decrement": false,
       "no-console": {
         "severity": "warning"
       }
     },
     "jsRules": {
       "import-name": false,
+      "no-increment-decrement": false,
       "no-console": {
         "severity": "warning"
       }
