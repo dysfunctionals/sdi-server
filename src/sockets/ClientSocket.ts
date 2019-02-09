@@ -13,8 +13,8 @@ export default class ClientSocket extends Socket {
     this.io
     .of('/client')
     .on('connect', (socket: socketIo.Socket) => {
-      socket.on('name', (name: string) => {
-        socket.emit('greet', `Hello ${name}!`);
+      socket.on('NAME_SELECTION', (name: string) => {
+        socket.emit('GAME_FULL', true);
       });
     });
   }
