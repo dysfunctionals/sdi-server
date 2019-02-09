@@ -7,10 +7,9 @@ import PlayersStore from './store/PlayersStore';
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 
-// Instantiate player store.
-// tslint:disable-next-line:max-line-length
-const store: PlayersStore = new PlayersStore();
-store.populatePositionsList();
+// Initialize player store.
+PlayersStore.init();
+PlayersStore.populatePositionsList();
 
 // Instantiate client socket.
 const socket: ClientSocket = new ClientSocket(server);

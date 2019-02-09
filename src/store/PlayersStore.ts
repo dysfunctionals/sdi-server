@@ -3,14 +3,14 @@ import { promisify } from 'util';
 
 export default class PlayersStore {
 
-  private client: redis.RedisClient;
+  private static client: redis.RedisClient;
 
-  constructor(options?: Object) {
+  public static init(options?: Object) {
 
     this.client = options ? redis.createClient(options) : redis.createClient();
   }
 
-  populatePositionsList() {
+  public static populatePositionsList() {
 
     // Start transaction.
     const multi: redis.Multi = this.client.multi();
@@ -28,7 +28,7 @@ export default class PlayersStore {
 
   // Check if any roles are open. If role is open, assign to player.
   // If no roles open, send error.
-  assignRole(): Promise<string> {
+  public static assignRole(): Promise<string> {
 
     return new Promise((resolve, reject) => {
 
