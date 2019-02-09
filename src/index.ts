@@ -1,11 +1,12 @@
 import express from 'express';
 import http from 'http';
-import ClientSocket from './sockets/client';
+import ClientSocket from './sockets/ClientSocket';
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 
 const socket: ClientSocket = new ClientSocket(server);
+socket.listen();
 
 server.listen(3000, (err: Error) => {
   if (err) {

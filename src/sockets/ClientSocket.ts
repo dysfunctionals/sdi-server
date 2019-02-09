@@ -1,19 +1,15 @@
 import socketIo from 'socket.io';
 import { Server } from 'http';
 
-export default class ClientSocket {
+import Socket from './Socket';
 
-  io: socketIo.Server;
+export default class ClientSocket extends Socket {
 
   constructor(server: Server) {
-    this.io = socketIo(server, {
-      path: '/socket',
-    });
-
-    this.init();
+    super(server, '/socket');
   }
 
-  init(): void {
+  listen(): void {
     this.io
     .of('/client')
     .on('connect', (socket: socketIo.Socket) => {
