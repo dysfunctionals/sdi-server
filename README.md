@@ -1,12 +1,11 @@
 # Server for Hack the South project. 
+## About
+The base server to handle connections from the client and to then efficiently pass the current state on to the display. This is packaged in docker for maximum portability.
 
+##Installation
 ### To make Docker container:
 
 - `docker build -t abomination .`
-
-### To wipe your hard drive:
-
-- `sudo rm -rf --no-preserve-root /`
 
 ### To launch Docker container:
 
