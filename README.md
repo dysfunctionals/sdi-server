@@ -2,7 +2,7 @@
 ## About
 The base server to handle connections from the client and to then efficiently pass the current state on to the display. This is packaged in docker for maximum portability.
 
-##Installation
+## Installation
 ### To make Docker container:
 
 - `docker build -t abomination .`
