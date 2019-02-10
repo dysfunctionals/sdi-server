@@ -16,7 +16,7 @@ const server: http.Server = http.createServer(app);
 // Configurate routes.
 routes(app);
 
-// Initialize player store.
+// Initialize stores.
 Store.init(() => {
   PlayerStore.populatePositionsList();
   ShipStore.populateShipData();

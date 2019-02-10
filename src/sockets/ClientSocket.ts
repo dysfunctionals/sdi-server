@@ -36,19 +36,17 @@ export default class ClientSocket extends Socket {
       });
 
       socket.on('POWER_CHANGED', (encodedData) => {
-        console.log(encodedData);
         const { ship, ...distribution } = encodedData;
         ShipStore.changePowerDistribution(ship, distribution);
       });
 
       socket.on('ANGLE_CHANGED', (encodedData) => {
-        console.log(encodedData);
         const { ship, role, angle } = encodedData;
         ShipStore.changeAngle(ship, role, angle);
       });
 
       socket.on('disconnect', () => {
-        PlayerStore.deassignRole(socket.id);
+        PlayerStore.deassignRole(socket.id.replace('/client#', ''));
       });
     });
   }

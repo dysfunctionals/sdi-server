@@ -1,4 +1,4 @@
-import { Multi, RedisClient } from 'redis';
+import { Multi } from 'redis';
 
 import Store from './Store';
 

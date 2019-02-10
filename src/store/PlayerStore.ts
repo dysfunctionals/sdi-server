@@ -48,10 +48,12 @@ export default class PlayerStore extends Store {
   }
 
   public static deassignRole(userId: string) {
+
     this.client.get(userId, (err: Error | null, result) => {
       if (err) {
         throw err;
       }
+      console.log(result);
       this.client.lpush('open-roles', result, (err: Error | null) => {
         if (err) {
           throw err;
