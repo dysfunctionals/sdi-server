@@ -3,7 +3,7 @@ import { Server } from 'http';
 
 import Socket from './Socket';
 
-import PlayersStore from '../store/PlayersStore';
+import PlayerStore from '../store/PlayerStore';
 
 export default class ClientSocket extends Socket {
 
@@ -20,7 +20,7 @@ export default class ClientSocket extends Socket {
           socket.emit('INVALID_NAME', true);
           return;
         }
-        PlayersStore.assignRole()
+        PlayerStore.assignRole(socket.id.replace('/client#', ''))
         .then((encodedRole: string) => {
           const decodedRole: string[] = encodedRole.split('-');
           socket.emit('ROLE_SELECTED', JSON.stringify({
@@ -31,6 +31,10 @@ export default class ClientSocket extends Socket {
         .catch(() => {
           socket.emit('GAME_FULL', true);
         });
+      });
+
+      socket.on('disconnect', () => {
+        PlayerStore.deassignRole(socket.id);
       });
     });
   }

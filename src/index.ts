@@ -1,26 +1,37 @@
 import express from 'express';
 import http from 'http';
+
+import routes from './routes';
+
 import ClientSocket from './sockets/ClientSocket';
-import PlayersStore from './store/PlayersStore';
+
+import Store from './store/Store';
+import PlayerStore from './store/PlayerStore';
+import ShipStore from './store/ShipStore';
 
 // Create server.
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 
+// Configurate routes.
+routes(app);
+
 // Initialize player store.
-PlayersStore.init();
-PlayersStore.populatePositionsList();
+Store.init(() => {
+  PlayerStore.populatePositionsList();
+  ShipStore.populateShipData();
+});
 
 // Instantiate client socket.
 const socket: ClientSocket = new ClientSocket(server);
 
 // Start listening for requests.
-server.listen(3000, (err: Error) => {
+server.listen(8080, (err: Error) => {
   if (err) {
     throw err;
   }
   // Start listening for socket connections.
   socket.listen();
   // tslint:disable-next-line
-  console.log('Server listening on port 3000');
+  console.log('Server listening on port 8080');
 });
