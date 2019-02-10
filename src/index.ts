@@ -1,12 +1,17 @@
+// Express as routing framework and basic http server.
 import express from 'express';
 import http from 'http';
 
+// Import routes configuration.
 import routes from './routes';
 
+// Using morgan to log requests.
 import logger from 'morgan';
 
+// Front-end socket connection.
 import ClientSocket from './sockets/ClientSocket';
 
+// Initialize game store.
 import Store from './store/Store';
 import PlayerStore from './store/PlayerStore';
 import ShipStore from './store/ShipStore';
@@ -15,10 +20,10 @@ import ShipStore from './store/ShipStore';
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 
-// Set up logging middleware.
+// Set up request logging middleware.
 app.use(logger('dev'));
 
-// Configurate routes.
+// Configure routes.
 routes(app);
 
 // Initialize stores.
