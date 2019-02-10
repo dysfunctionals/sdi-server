@@ -16,11 +16,7 @@ export default class ClientSocket extends Socket {
     this.io
     .of('/client')
     .on('connect', (socket: socketIo.Socket) => {
-      socket.on('NAME_SELECTION', (name: string) => {
-        if (name.length !== 2 || !(/^[a-zA-Z]+$/).test(name)) {
-          socket.emit('INVALID_NAME', true);
-          return;
-        }
+      socket.on('ENTER_GAME', () => {
         PlayerStore.assignRole(socket.id.replace('/client#', ''))
         .then((encodedRole: string) => {
           const decodedRole: string[] = encodedRole.split('-');
