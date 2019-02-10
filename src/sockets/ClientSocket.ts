@@ -4,6 +4,7 @@ import { Server } from 'http';
 import Socket from './Socket';
 
 import PlayerStore from '../store/PlayerStore';
+import ShipStore from '../store/ShipStore';
 
 export default class ClientSocket extends Socket {
 
@@ -30,7 +31,20 @@ export default class ClientSocket extends Socket {
         })
         .catch(() => {
           socket.emit('GAME_FULL', true);
+          socket.disconnect();
         });
+      });
+
+      socket.on('POWER_CHANGED', (encodedData) => {
+        console.log(encodedData);
+        const { ship, ...distribution } = encodedData;
+        ShipStore.changePowerDistribution(ship, distribution);
+      });
+
+      socket.on('ANGLE_CHANGED', (encodedData) => {
+        console.log(encodedData);
+        const { ship, role, angle } = encodedData;
+        ShipStore.changeAngle(ship, role, angle);
       });
 
       socket.on('disconnect', () => {
