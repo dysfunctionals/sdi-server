@@ -9,7 +9,7 @@ import ShipStore from '../store/ShipStore';
 export default class ClientSocket extends Socket {
 
   constructor(server: Server) {
-    super(server, '/socket');
+    super(server);
   }
 
   listen(): void {

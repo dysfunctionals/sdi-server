@@ -5,9 +5,9 @@ export default abstract class Socket {
 
   protected io: socketIo.Server;
 
-  constructor(server: Server, path: string) {
+  constructor(server: Server) {
     this.io = socketIo(server, {
-      path,
+      path: ''
     });
   }
 
