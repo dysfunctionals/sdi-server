@@ -41,8 +41,8 @@ export default class ClientSocket extends Socket {
       });
 
       socket.on('ANGLE_CHANGED', (encodedData) => {
-        const { ship, role, angle } = encodedData;
-        ShipStore.changeAngle(ship, role, angle);
+        const { ship, role, angle, on: active } = encodedData;
+        ShipStore.changeAngle(ship, role, angle, active);
       });
 
       socket.on('disconnect', () => {

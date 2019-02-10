@@ -53,7 +53,7 @@ export default class PlayerStore extends Store {
       if (err) {
         throw err;
       }
-      console.log(result);
+
       this.client.lpush('open-roles', result, (err: Error | null) => {
         if (err) {
           throw err;

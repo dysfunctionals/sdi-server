@@ -3,6 +3,8 @@ import http from 'http';
 
 import routes from './routes';
 
+import logger from 'morgan';
+
 import ClientSocket from './sockets/ClientSocket';
 
 import Store from './store/Store';
@@ -12,6 +14,9 @@ import ShipStore from './store/ShipStore';
 // Create server.
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
+
+// Set up logging middleware.
+app.use(logger('dev'));
 
 // Configurate routes.
 routes(app);

@@ -38,9 +38,15 @@ export default class ShipStore extends Store {
     multi.exec();
   }
 
-  public static changeAngle(ship: number, role: string, angle: string) {
+  public static changeAngle(ship: number, role: string, angle: number, active: number) {
 
-    this.client.hset(`ship:${ship}:${role}`, 'angle', angle);
+    const multi: Multi = this.client.multi();
+    multi.hset(`ship:${ship}:${role}`, 'active', `${active}`);
+    if (angle > 0) {
+
+      multi.hset(`ship:${ship}:${role}`, 'angle', `${angle}`);
+    }
+    multi.exec();
   }
 
   public static getShipMetrics(): Promise<Object> {
