@@ -28,7 +28,7 @@ export default class PlayerStore extends Store {
     return new Promise((resolve, reject) => {
 
       this.client.rpop('open-roles', (err: Error | null, result: string) => {
-        if (err || result === null) {
+        if (err || !!!result) {
           reject(err || Error('Roles not available'));
           return;
         }
